@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
-sudo groupadd admin
-sudo usermod -G admin vagrant
-sudo apt-get update
+sudo apt-get update && sudo apt-get upgrade -y
+sudo apt-get install synapse geany git vim gnome-shell shutter meld filezilla
+
+#sudo groupadd admin
+#sudo usermod -G admin vagrant
+#sudo apt-get update
 
 # Install mysql first to prevent issues with zend
 # Password 'root' will be set.
@@ -51,6 +54,16 @@ sudo sed -i '$a Include /etc/phpmyadmin/apache.conf' /etc/apache2/apache2.conf
 # a development environment... right?) to something like 5.7 days.
 sudo sed -i '$a // Bootstrap.sh here, just increasing the auto logout time for phpmyadmin.' /etc/phpmyadmin/config.inc.php
 sudo sed -i '$a $cfg['\''LoginCookieValidity'\''] = 500000;' /etc/phpmyadmin/config.inc.php
+
+# Install Brackets from PPA
+sudo add-apt-repository ppa:webupd8team/brackets
+sudo apt-get update
+sudo apt-get install brackets
+
+# Install Sublime Text from PPA
+sudo add-apt-repository ppa:webupd8team/sublime-text-3
+sudo apt-get update
+sudo apt-get install sublime-text-installer
 
 # Restart apache and let the world know we've finished.
 sudo service apache2 restart
